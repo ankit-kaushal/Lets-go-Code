@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+struct edge
+{
+	int source;
+	int dest;
+	int weight;
+};
+main()
+{
+	int v,i;
+	cout<<"enter no of vertices\n";
+	cin>>v;
+	int e;
+	cout<<"enter no of edges\n";
+	cin>>e;
+	edge arr[e];
+	int key[v];
+	for(i=0;i<v;i++)
+	{
+		key[i]=INT_MAX;
+	}
+	key[0]=0;
+	cout<<"enter data\n";
+	for(i=0;i<e;i++)
+	{
+		cout<<"enter source vertex\n";
+		cin>>arr[i].source;
+		cout<<"enter dest vertex\n";
+		cin>>arr[i].dest;
+		cout<<"enter weight\n";
+		cin>>arr[i].weight;
+	}
+	for(i=0;i<v-1;i++)
+	{
+		for(int j=0;j<e;j++)
+		{
+			if(key[arr[j].dest]>key[arr[j].source]+arr[j].weight)
+			{
+				key[arr[j].dest]=key[arr[j].source]+arr[j].weight;
+			}
+		}
+	}
+	cout<<"after relaxing\n";
+	for(i=0;i<v;i++)
+	{
+		cout<<i<<" "<<key[i]<<"\n";
+	}
+}

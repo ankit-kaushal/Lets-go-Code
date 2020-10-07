@@ -1,0 +1,101 @@
+#include<iostream>
+using namespace std;
+#include<stdlib.h>
+#define ma 100
+/////////////////////////////
+struct vertex
+{
+    int d;
+    struct vertex *next;
+};
+ int n;
+  struct vertex *v[ma]={NULL};
+
+  int visit[ma]={0};
+///////////////////////////////
+void value(int &a,int &b)
+{
+    cout<<"enter source and destination"<<endl;
+    cin>>a>>b;
+}
+//////////////////////////////////
+void create(struct vertex *v[],int n,int e)
+{
+    int i,j;
+     int a,b;
+    for(j=0;j<e;j++)
+    {
+        value(a,b);
+
+        struct vertex *New=NULL,*ptr=NULL;
+        New=new struct vertex;
+        New->d=b;
+        New->next=NULL;
+
+        if(v[a]==NULL)
+        {
+
+            v[a]=New;
+        }
+        else
+        {
+
+            ptr=v[a];
+            while(ptr->next!=NULL)
+                ptr=ptr->next;
+            ptr->next=New;
+        }
+    }
+}
+///////////////////////////////
+void print(struct vertex *v[],int n,int e)
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        cout<<i<<"->";
+        struct vertex *ptr=v[i];
+        while(ptr!=NULL)
+        {
+            cout<<ptr->d<<" -> ";
+            ptr=ptr->next;
+        }
+        cout<<endl;
+    }
+}
+////////////////////////////
+void dfs(int i)
+{
+    int j;
+    struct vertex *p;
+    cout<<i<<endl;
+    p=v[i];
+    visit[i]=1;
+    while(p!=NULL)
+    {
+        j=p->d;
+        if(visit[j]!=1)
+        {
+
+            dfs(j);
+        }
+        p=p->next;
+    }
+}
+////////////////////////////////////
+int main()
+{
+    int e;
+    cout<<"enter number of edge"<<endl;
+    cin>>e;
+    cout<<"enter number of vertices"<<endl;
+    cin>>n;
+
+     create(v,n,e);
+     print(v,n,e);
+     cout<<"enter source vertex "<<endl;
+     int s;
+     cin>>s;
+     cout<<"visited vertex are: "<<endl;
+     dfs(s);
+}

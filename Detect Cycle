@@ -1,0 +1,114 @@
+#include<iostream>
+using namespace std;
+#define Max 100
+////////////////
+struct Edge
+{
+    int s,d;
+};
+////////////////////
+struct edgelist
+{
+    struct Edge edge[Max];
+    int x;
+};
+//////////////////
+void create(int a[Max][Max],int n)///create adjacent matrix graph
+{
+    int i,j;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            cin>>a[i][j];
+    }
+}
+/////////////
+int finde(int visit[],int x)//use to find about parent node of graph
+{
+    return(visit[x]);
+}
+///////////////
+void unione(int visit[],int c,int d,int n)//use of union to to add node under same parent node
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        if(visit[i]==c)
+            visit[i]=d;
+    }
+
+}
+/////////////////
+void print(int a[Max][Max],int n)//print adjacent matrix graph
+{
+
+    int i,j;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+            cout<<a[i][j]<<" ";
+             cout<<endl;
+    }
+
+}
+////////////////
+void detect(int a[Max][Max],int n)
+{
+    int i,j;
+    struct edgelist start;
+    start.x=0;
+    for(i=1;i<n;i++)//adding edge to Edge structure using edge list structure
+    {
+        for(j=0;j<=i;j++)
+        {
+            if(a[i][j]!=0)
+            {
+                start.edge[start.x].s=i;
+                start.edge[start.x].d=j;
+                start.x=start.x+1;
+            }
+
+        }
+    }
+
+
+    int visited[n];
+    for(j=0;j<n;j++)//use to store parent node of each vertex
+        visited[j]=j;
+
+        int x=0;
+    for(j=0;j<start.x;j++)
+    {
+       int c1,c2;
+       c1=finde(visited,start.edge[j].s);//find whether both have same parent or not
+       c2=finde(visited,start.edge[j].d);
+
+       if(c1!=c2)
+       {
+           unione(visited,c1,c2,n);
+       }
+       else
+       {
+           x=1;
+           break;
+       }
+
+    }
+    if(x==0)
+        cout<<"cycle does not exist"<<endl;
+    else
+        cout<<"cycle exist"<<endl;
+}
+/////////////////////
+int main()
+{
+    int n;
+    cout<<"enter number of vertices"<<endl;
+    cin>>n;
+    int a[Max][Max];
+    create(a,n);
+    print(a,n);
+    cout<<"apply detect funciont to check cycle"<<endl;
+    detect(a,n);
+    return 0;
+}

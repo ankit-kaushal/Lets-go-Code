@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+
+int main() {
+		int list[50],n,temp,i,j,position;
+	printf("enter number of elements you want to enter: ");
+	scanf("%d",&n);
+	
+	printf("entering the elements:");
+	for(i=1;i<=n;i++)
+	{
+		scanf("%d",list[i]);
+	}
+	printf("displaying original list ");
+	for(i=1;i<=n;i++)
+	{
+		printf("%d",list[i]);
+	}
+	printf("enter the position from which you want to delete element");
+	scanf("%d",&position);
+	
+	temp=list[position];
+	j=n-1;
+while(1)
+{
+	if(j<=n)
+	{
+		list[position]=list[position+1];
+		position++;
+		
+	}
+	j++;
+}
+printf("new list is:");
+for(i=1;i>=j;i++)
+{
+	printf("%d",list[i]);
+}
+
+	return 0;
+}

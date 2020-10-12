@@ -1,0 +1,51 @@
+#include <iostream> 
+using namespace std; 
+  
+ 
+struct Node { 
+    int data; 
+    Node* next; 
+}; 
+  
+void insertelements(Node* root, int item) 
+{ 
+    Node* temp = new Node; 
+    Node* ptr; 
+    temp->data = item; 
+    temp->next = NULL; 
+  
+    if (*root == NULL) 
+        *root = temp; 
+    else { 
+        ptr = *root; 
+        while (ptr->next != NULL) 
+            ptr = ptr->next; 
+        ptr->next = temp; 
+    } 
+} 
+  
+void display(Node* root) 
+{ 
+    while (root != NULL) { 
+        cout << root->data << " "; 
+        root = root->next; 
+    } 
+} 
+  
+Node *arrayToList(int list[], int length) 
+{ 
+    Node *root = NULL; 
+    for (int i = 0; i < length; i++) 
+        insertelements(&root, list[i]); 
+   return root; 
+} 
+  
+ 
+int main() 
+{ 
+    int list[] = { 21, 32, 43, 54, 65 }; 
+    int length = sizeof(arr) / sizeof(arr[0]); 
+    Node* root = arrayToList(list, length); 
+    display(root); 
+    return 0; 
+}

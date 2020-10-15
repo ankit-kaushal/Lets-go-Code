@@ -1,0 +1,60 @@
+#include <iostream> 
+  
+using namespace std; 
+  
+
+void heap1(int list[], int number, int i) 
+{ 
+    int largest = i; 
+    int left = 2*i + 1;  
+    int right = 2*i + 2; 
+  
+     
+    if (left < number && list[left] > list[largest]) 
+        largest = left; 
+  
+     
+    if (right < number && list[right] > list[largest]) 
+        largest = right; 
+  
+    // If largest is not root 
+    if (largest != i) 
+    { 
+        swap(list[i], list[largest]); 
+  
+         
+        heap1(list, number, largest); 
+    } 
+} 
+  
+void heapSort(int list[], int number) 
+{  
+    for (int i = number / 2 - 1; i >= 0; i--) 
+        heap1(list, number, i); 
+  
+     
+    for (int i=number-1; i>0; i--) 
+    { 
+        
+        swap(list[0], list[i]);  
+        heap(list, i, 0); 
+    } 
+} 
+ 
+void printArray(int list[], int number) 
+{ 
+    for (int i=0; i<number; ++i) 
+        cout << list[i] << " "; 
+    cout << "\n"; 
+} 
+ 
+int main() 
+{ 
+    int list[] = {32, 41, 53, 91, 36, 17}; 
+    int number = sizeof(list)/sizeof(list[0]); 
+  
+    heapSort(list, number); 
+  
+    cout << "Sorted array is \n"; 
+    printArray(list, number); 
+} 

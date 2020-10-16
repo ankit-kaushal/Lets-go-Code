@@ -1,0 +1,67 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+struct edge{
+	int start,end,weight;
+	bool operator<(edge const& other) {
+        return weight < other.weight;
+    }
+};
+int n;
+vector<edge> edges;
+vector<edge> result; 
+void make_set(int v,vector<int>& parent) {
+    parent[v] = v;
+}
+int find_parent(int v,vector<int>& parent){
+	if (v == parent[v]){
+        return v;
+	}
+    return find_parent(parent[v],parent);
+}
+
+void union_find(int a,int b,vector<int>& parent){
+	a = find_parent(a,parent);
+	b = find_parent(b,parent);
+	if(a != b){
+		parent[b] = a;
+	}
+}
+
+void kruskal(){
+	//make_parent();
+	vector<int> parent(n);
+
+	for (int i = 1; i <= n; i++){
+       make_set(i,parent);
+   }
+	int cost = 0,count = 0;
+	sort( edges.begin(),edges.end() );
+	for(auto e : edges){
+		if( find_parent(e.start,parent) != find_parent(e.end,parent) ){
+			cost += e.weight;
+            result.push_back(e);
+            union_find(e.start, e.end,parent);
+            count++;
+		}
+		if(count == n-1){
+			break;
+		}
+	}
+	
+	cout  << cost << endl;
+}
+
+int main(){
+	
+	int e;
+	cin >> n >> e;
+	for(int i=1;i<=e	;i++){
+	 int start , end , weight;
+	 cin >> start >> end >> weight;
+	 edges.push_back({start,end,weight});
+	}
+	kruskal();
+	
+}

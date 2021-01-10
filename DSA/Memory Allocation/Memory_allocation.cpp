@@ -1,5 +1,4 @@
 #include<iostream>
-#include<cstring>
 using namespace std;
 
 int main(){
@@ -35,7 +34,7 @@ int main(){
 		cout<<a[i]<<" ";
 	}
 	
-	//Freeup the space to avoid Menory Leaks
+	//Freeup the space to avoid Memory Leaks
 	delete [] a;
 
 	return 0;

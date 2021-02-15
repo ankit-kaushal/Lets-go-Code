@@ -7,7 +7,7 @@ struct min_heap_node {
 	min_heap_node *left, *right; 
 	min_heap_node(char data, unsigned freq) 
 	{ 
-		left = right = NULL; 
+		left = right = NULL; sdfsfsdfdsf
 		this->data = data; 
 		this->freq = freq; 
 	} 

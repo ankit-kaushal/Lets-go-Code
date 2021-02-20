@@ -63,6 +63,5 @@ int main()
 	int size = sizeof(arr) / sizeof(arr[0]); 
 
 	huff_code(arr, freq, size); 
-
 	return 0; 
 } 

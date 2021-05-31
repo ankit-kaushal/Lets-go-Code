@@ -152,6 +152,8 @@ istream& operator>>(istream &is, node*&head){
 	return is;
 }
 
+// istream& an ostream& means returning by reference
+
 
 /*
 we are doing here cascading of operator
@@ -159,7 +161,7 @@ if we write void instead of ostream& in the return type of above function then
 we cannot do cout<<head<<head2; because 'cout<<head' will return void. So, after doing ostream& 'cout<<head' will return cout object.
 
 
-Same is the case with cin>>head>>haed2
+Same is the case with cin>>head>>head2
 */
 
 int main(){

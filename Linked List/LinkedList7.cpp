@@ -159,7 +159,7 @@ if we write void instead of ostream& in the return type of above function then
 we cannot do cout<<head<<head2; because 'cout<<head' will return void. So, after doing ostream& 'cout<<head' will return cout object.
 
 
-Same is the case with cin>>head>>head2
+Same is the case with cin>>head>>haed2
 */
 
 
@@ -194,12 +194,119 @@ node* recReverse(node*head){
 	return shead;
 }
 
+
+/*
+One way to find mid point of linked list is to find the length of linked list and then we can iterate to length/2
+but it takes O(n) time. 
+
+So more efficient way to do it is Midpoint runner technique
+In this technique we will use two pointer(slow and fast) in which slow pointer will be at head and fast pointer will be at head->next
+So fast will move two step and slow will move only one step.
+So when fast will not able to move two step ahead then slow will be at the mid of linked list
+
+*/
+
+node* midPoint(node*head){
+	if(head==NULL or head->next==NULL){
+		return head;
+	}
+	
+	node*slow=head;
+	node*fast=head->next;
+	
+	while(fast!=NULL and fast->next!=NULL){
+		fast=fast->next->next;
+		slow=slow->next;
+	}
+	
+	return slow;
+}
+
+/*
+To find kth node from end 
+1. 1 way is to find length of Linked List then iterate till length-k
+2. 2nd way is take two pointer(fast & slow), initially both at head, take fast pointer k-jumps ahead, and slow still at head
+after that take 1-1 step each, and when fast will reach NULL than slow will be at kth node from end
+
+*/
+
+node* merge(node*a, node*b){
+	//base case
+	if(a==NULL){
+		return b;
+	}
+	if(b==NULL){
+		return a;
+	}
+	//we take a head pointer
+	node*c;
+	
+	if(a->data < b->data){
+		c=a;
+		c->next=merge(a->next,b);
+	}
+	else{
+		c=b;
+		c->next=merge(b->next,a);
+	}
+	return c;
+}
+
+/*
+MERGE SORT
+-Sort an unsorted Linked List
+Steps->
+1. Take midpint and divide linked list into 2 linked list
+2. Recursively sort left and right part
+3. Merge Them
+*/
+
+node* mergeSort(node*head){
+	//base case
+	if(head==NULL or head->next==NULL){
+		return head;
+	}
+	
+	//recursive case
+	//1. break about the midpoint
+	
+	node* mid=midPoint(head);
+	node* a=head;
+	node* b=mid->next;
+	
+	mid->next=NULL;
+	
+	//2. recursively sort the two parts
+	a=mergeSort(a);
+	b=mergeSort(b);
+	
+	//3. merge them
+	node*c=merge(a,b);
+	
+	return c;
+}
+
+bool detectCycle(){
+	node *slow=head;
+	node *fast=head;
+	while(fast!=NULL && fast->next!=NULL){
+		fast=fast->next->next;
+		slow=slow->next;
+		if(fast==slow){
+			return true;
+		}
+	}
+	return false;
+}
+
+
 int main(){
 	node*head;
+
 	cin>>head;
 	cout<<head;
 	
-	head=recReverse(head);
+	head=mergeSort(head);
 	
 	cout<<head;
 	

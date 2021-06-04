@@ -6,7 +6,7 @@ using namespace std;
 /*
 
 Map is an assiciative containers that holds mapping between key and the value pairs. 
-We have two maps in C++ - Simple Mand and Unordered Map
+We have two maps in C++ - Simple Map and Unordered Map
 
 How does this happens internally?
 - A map maintains self balancing BST, to do the work. Here, ordered are defined by keys. So, keys are ordered.

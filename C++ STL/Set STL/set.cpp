@@ -20,14 +20,14 @@ int main() {
     for(int i=0;i<n;i++){
     	s.insert(arr[i]);
 	}
-	
+	/*
 	//Two ways to erase an element
 	
 	s.erase(10);
 	
 	auto it=s.find(11);
 	s.erase(it);
-	
+	*/
 	
 	//Print all the emements
 	//Set has its own itereator or we can use auto keyword.

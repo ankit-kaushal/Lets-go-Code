@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 #define N 105
-#define WMAX 205
-
+#define WMAX 2000
 struct item{
 	int profit;
 	int weight;
